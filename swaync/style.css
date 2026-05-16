@@ -1,0 +1,106 @@
+/* =========================
+   GLOBAL STYLE
+========================= */
+* {
+  font-family: "JetBrains Mono", "Inter", sans-serif;
+  font-size: 13px;
+}
+
+/* =========================
+   MAIN WINDOW (BLUR GLASS)
+========================= */
+window#swayncControlCenter,
+window#swayncNotificationWindow {
+  background: rgba(20, 20, 24, 0.60);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+
+/* =========================
+   SLIDE-IN ANIMATION
+========================= */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(35px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* APPLY ANIMATION */
+.notification {
+  background: rgba(30, 30, 36, 0.55);
+  border-radius: 14px;
+  margin: 8px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+
+  animation: slideIn 0.28s cubic-bezier(0.2, 0.9, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+/* =========================
+   HOVER EFFECT
+========================= */
+.notification:hover {
+  background: rgba(40, 40, 48, 0.65);
+  transform: translateY(-2px);
+  transition: 0.2s ease;
+}
+
+/* =========================
+   TEXT
+========================= */
+.summary {
+  font-weight: bold;
+  color: #cdd6f4;
+}
+
+.body {
+  color: #a6adc8;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+.notification-action {
+  background: rgba(60, 60, 70, 0.5);
+  border-radius: 10px;
+  padding: 4px 8px;
+  margin-top: 6px;
+  border: none;
+}
+
+.notification-action:hover {
+  background: rgba(100, 100, 120, 0.6);
+}
+
+/* =========================
+   CONTROL CENTER GRID
+========================= */
+.widget-buttons-grid button {
+  background: rgba(50, 50, 60, 0.5);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 4px;
+}
+
+.widget-buttons-grid button:hover {
+  background: rgba(90, 90, 110, 0.6);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+scrollbar {
+  background: transparent;
+}
+
+scrollbar slider {
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+}

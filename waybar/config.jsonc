@@ -1,0 +1,146 @@
+{
+  "position": "top",
+  "margin-top": 0,
+
+  "modules-left": ["custom/launcher", "clock", "custom/pacman", "hyprland/submap", "custom/media"],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": ["pulseaudio", "tray"],
+
+  "hyprland/submap": {
+    "format": "{}",
+    "tooltip": false
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "λ", 
+      "2": "μ", 
+      "3": "π", 
+      "4": "σ", 
+      "5": "τ",
+      "default": "",
+      "urgent": ""
+    },
+    "persistent-workspaces": {
+      "*": 5
+    },
+    "on-click": "activate",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "on-scroll-up": "hyprctl dispatch workspace e-1"
+  },
+
+  "custom/weather": {
+    "exec": "${HOME}/.config/waybar/scripts/get-weather.sh Bangalore+India",
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": true,
+    "interval": 3600
+  },
+
+  "custom/notification": {
+    "tooltip": true,
+    "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "",
+      "none": "",
+      "dnd-notification": "",
+      "dnd-none": "",
+      "inhibited-notification": "",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/launcher": {
+    "format": "",
+    "on-click": "swaync-client -t",
+    "tooltip-format": "Launch your favorite apps"
+  },
+
+  "custom/media": {
+    "format": "{}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 40,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "smooth-scrolling-threshold": 1, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources/custom_modules folder
+  },
+
+  "custom/pacman": {
+    "format": "󰅢  {}",
+    "interval": "once",
+    "exec": "checkupdates | wc -l",
+    "on-click": "kitty --hold yay -Syu",
+    "signal": 8,
+    "tooltip-format": "{} updates available"
+  },
+
+
+  "battery": {
+    "format": "{icon}   {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format": "Battery is at {capacity}%"
+  },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "󰂱 {volume}%",
+    "format-muted": "󰖁",
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"],
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "󰋎",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["󰖀", "󰕾"]
+    },
+    "tooltip-format": "Volume: {volume}%"
+  },
+
+  "clock": {
+    "format": "󰥔  {:%I:%M %p}",
+    "interval": 1,
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "format": {
+        "today": "<span color='#ff0000'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "shift_up",
+      "on-click": "shift_down"
+    }
+  },
+
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power mode: {profile}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "󰠠",
+      "balanced": "󰚀",
+      "power-saver": "󰌪"
+    }
+}
+}

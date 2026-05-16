@@ -1,0 +1,33 @@
+* {
+    background: #222630;
+    background-alt: #2f333c;
+    foreground: #78a8b7;
+    selected: #75a9ba;
+    active: #5ae264;
+    urgent: #e25a80;
+
+    border-color: #4e5159;
+    separatorcolor: #4e5159;
+    scrollbar-handle: #608491;
+}
+
+window {
+    background-color: @background;
+    text-color: @foreground;
+    border-color: @border-color;
+}
+
+mainbox, inputbar, listview {
+    background-color: @background;
+    text-color: @foreground;
+}
+
+element {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element selected {
+    background-color: @selected;
+    text-color: @background;
+}

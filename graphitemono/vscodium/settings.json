@@ -1,0 +1,37 @@
+{
+  "editor.background": "#1e1e1e",
+  "editor.foreground": "#c4c4c4",
+  "catppuccin-noctis-icons.hidesExplorerArrows": false,
+  "editor.fontLigatures": false,
+  "editor.fontFamily": "JetBrainsMono Nerd Font Propo",
+  "editor.fontWeight": "bold",
+  "files.autoSave": "afterDelay",
+  "workbench.statusBar.visible": false,
+  "workbench.notifications.showInTitleBar": false,
+  "window.titleBarStyle": "native",
+  "window.customTitleBarVisibility": "never",
+  "window.customMenuBarAltFocus": false,
+  "window.enableMenuBarMnemonics": false,
+  "window.menuBarVisibility": "hidden",
+  "editor.minimap.enabled": false,
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.colorCustomizations": {
+    "editor.background": "#1e1e1e",
+    "editor.foreground": "#c4c4c4",
+    "sideBar.background": "#2c2c2c",
+    "activityBar.background": "#1e1e1e",
+    "statusBar.background": "#2c2c2c",
+    "tab.activeBackground": "#393939",
+    "tab.activeForeground": "#c4c4c4",
+    "focusBorder": "#c2c2c2",
+    "button.background": "#c2c2c2",
+    "button.foreground": "#1e1e1e"
+  },
+  "editor.fontVariations": false,
+  "workbench.editor.autoLockGroups": {
+    "workbench.editor.chatSession": true,
+    "agentSessionsWelcomePage": true
+  },
+  "security.workspace.trust.untrustedFiles": "newWindow"
+}

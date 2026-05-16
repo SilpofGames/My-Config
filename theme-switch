@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+set -u
+
+THEME="${1:-}"
+BASE="$HOME/.config/colorschemes/$THEME"
+
+if [ -z "$THEME" ] || [ ! -d "$BASE" ]; then
+  echo "Theme not found: $THEME"
+  exit 1
+fi
+
+echo "Switching to: $THEME"
+mkdir -p "$HOME/.cache"
+echo "$THEME" >"$HOME/.cache/current-theme"
+
+#################################
+# WALLPAPER
+#################################
+if command -v awww >/dev/null; then
+  if [ -f "$BASE/wallpaper.png" ]; then
+    awww img "$BASE/wallpaper.png" --resize crop --transition-fps 60 --transition-type center --transition-duration 1.5
+  elif [ -f "$BASE/wallpaper.jpg" ]; then
+    awww img "$BASE/wallpaper.jpg" --resize crop --transition-fps 60 --transition-type center --transition-duration 1.5
+  elif [ -f "$BASE/wallpaper.jpeg" ]; then
+    awww img "$BASE/wallpaper.jpeg" --resize crop --transition-fps 60 --transition-type center --transition-duration 1.5
+  fi
+fi
+
+#################################
+# WAYBAR
+#################################
+if [ -f "$BASE/waybar/colors.css" ]; then
+  ln -sf "$BASE/waybar/colors.css" "$HOME/.config/waybar/colors.css"
+  if command -v waybar >/dev/null; then
+    pkill waybar 2>/dev/null || true
+    waybar >/dev/null 2>&1 &
+  fi
+fi
+
+#################################
+# ROFI
+#################################
+if [ -f "$BASE/cava/config" ]; then
+  ln -sf "$BASE/cava/config" "$HOME/.config/cava/config"
+fi
+
+#################################
+# CAVA
+#################################
+if [ -f "$BASE/rofi/colors.rasi" ]; then
+  ln -sf "$BASE/rofi/colors.rasi" "$HOME/.config/rofi/colors.rasi"
+fi
+
+#################################
+# KITTY
+#################################
+if [ -f "$BASE/kitty/colors.conf" ]; then
+  ln -sf "$BASE/kitty/colors.conf" "$HOME/.config/kitty/colors.conf"
+fi
+
+#################################
+# FOOT
+#################################
+if [ -f "$BASE/foot/colors.ini" ] && [ -d "$HOME/.config/foot" ]; then
+  ln -sf "$BASE/foot/colors.ini" "$HOME/.config/foot/colors.ini"
+fi
+
+#################################
+# NEOVIM
+#################################
+if [ -f "$BASE/nvim/colorscheme.lua" ]; then
+  mkdir -p "$HOME/.config/nvim/lua/core"
+  ln -sf "$BASE/nvim/colorscheme.lua" "$HOME/.config/nvim/lua/core/colorscheme.lua"
+fi
+
+#################################
+# GTK
+#################################
+GTK_CONF=""
+if [ -f "$BASE/gtk.conf" ]; then
+  GTK_CONF="$BASE/gtk.conf"
+elif [ -f "$BASE/gtk/gtk.conf" ]; then
+  GTK_CONF="$BASE/gtk/gtk.conf"
+fi
+
+if [ -n "$GTK_CONF" ]; then
+  GTK_THEME=$(grep '^gtk-theme=' "$GTK_CONF" | cut -d= -f2-)
+  ICON_THEME=$(grep '^icon-theme=' "$GTK_CONF" | cut -d= -f2-)
+  CURSOR_THEME=$(grep '^cursor-theme=' "$GTK_CONF" | cut -d= -f2-)
+  FONT=$(grep '^font=' "$GTK_CONF" | cut -d= -f2-)
+
+  [ -n "$GTK_THEME" ] && gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME" 2>/dev/null || true
+  [ -n "$ICON_THEME" ] && gsettings set org.gnome.desktop.interface icon-theme "$ICON_THEME" 2>/dev/null || true
+  [ -n "$CURSOR_THEME" ] && gsettings set org.gnome.desktop.interface cursor-theme "$CURSOR_THEME" 2>/dev/null || true
+  [ -n "$FONT" ] && gsettings set org.gnome.desktop.interface font-name "$FONT" 2>/dev/null || true
+fi
+
+#################################
+# FIREFOX
+#################################
+if [ -f "$BASE/firefox/userChrome.css" ]; then
+  ln -sf "$BASE/firefox/userChrome.css" "$HOME/.config/mozilla/firefox/goce4le0.default-release-1778889270494/chrome/userChrome.css"
+fi
+
+#################################
+# VSCODIUM
+#################################
+if [ -f "$BASE/vscodium/settings.json" ]; then
+  mkdir -p "$HOME/.config/VSCodium/User"
+  ln -sf "$BASE/vscodium/settings.json" "$HOME/.config/VSCodium/User/settings.json"
+fi
+
+#################################
+# SPOTIFY / SPICETIFY
+#################################
+if command -v spicetify >/dev/null && [ -f "$BASE/spotify/color.ini" ]; then
+  SPICE_THEME_DIR="$HOME/.config/spicetify/Themes/$THEME"
+  mkdir -p "$SPICE_THEME_DIR"
+  ln -sf "$BASE/spotify/color.ini" "$SPICE_THEME_DIR/color.ini"
+  spicetify config current_theme "$THEME" color_scheme Base >/dev/null
+  if pgrep -x spotify >/dev/null; then
+    spicetify apply >/dev/null || true
+  else
+    spicetify apply -n >/dev/null || true
+  fi
+fi
+
+echo "Theme applied: $THEME"

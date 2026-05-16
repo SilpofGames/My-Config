@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Configuration
+THEME_DIR="$HOME/.config/colorschemes"
+SWITCH_SCRIPT="$HOME/.local/bin/theme-switch"
+
+# Check if theme directory exists
+if [[ ! -d "$THEME_DIR" ]]; then
+    notify-send "Theme Error" "Directory $THEME_DIR not found."
+    exit 1
+fi
+
+MENU=""
+
+# Build the menu for rofi
+# We find directories in THEME_DIR, sort them, and loop through
+while IFS= read -r -d '' dir; do
+    theme=$(basename "$dir")
+    wp=""
+    
+    # Check for wallpaper to use as an icon
+    if [[ -f "$dir/wallpaper.png" ]]; then
+        wp="$dir/wallpaper.png"
+    elif [[ -f "$dir/wallpaper.jpg" ]]; then
+        wp="$dir/wallpaper.jpg"
+    elif [[ -f "$dir/wallpaper.jpeg" ]]; then
+        wp="$dir/wallpaper.jpeg"
+    fi
+    
+    # Rofi dmenu format with icons: <label>\0icon\x1f<path>\n
+    # We use escaped backslashes so printf %b can expand them later.
+    # Bash variables cannot store literal null bytes.
+    if [[ -n "$wp" ]]; then
+        MENU+="${theme}\\0icon\\x1f${wp}\n"
+    else
+        MENU+="${theme}\n"
+    fi
+done < <(find "$THEME_DIR" -mindepth 1 -maxdepth 1 -type d ! -name ".*" -print0 | sort -z)
+
+# Show the rofi menu
+CHOICE=$(printf "%b" "$MENU" | rofi -dmenu -p "Select Theme" -show-icons -i)
+
+# Exit if no choice was made (e.g., pressed Esc)
+[[ -z "$CHOICE" ]] && exit 0
+
+# Apply the theme
+if [[ -x "$SWITCH_SCRIPT" ]]; then
+    "$SWITCH_SCRIPT" "$CHOICE"
+    notify-send "Theme Switcher" "Applied theme: $CHOICE"
+else
+    # Fallback if the script isn't found where expected
+    if command -v theme-switch >/dev/null; then
+        theme-switch "$CHOICE"
+        notify-send "Theme Switcher" "Applied theme: $CHOICE"
+    else
+        notify-send "Theme Error" "Switch script not found: $SWITCH_SCRIPT"
+        exit 1
+    fi
+fi
