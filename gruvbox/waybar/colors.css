@@ -1,0 +1,100 @@
+@define-color background #32302f;
+
+@define-color error #fb4934;
+
+@define-color error_container #4b2b2b;
+
+@define-color inverse_on_surface #32302f;
+
+@define-color inverse_primary #ebdbb2;
+
+@define-color inverse_surface #ebdbb2;
+
+@define-color on_background #ebdbb2;
+
+@define-color on_error #282828;
+
+@define-color on_error_container #f2b8b5;
+
+@define-color on_primary #282828;
+
+@define-color on_primary_container #ebdbb2;
+
+@define-color on_primary_fixed #1d2021;
+
+@define-color on_primary_fixed_variant #504945;
+
+@define-color on_secondary #282828;
+
+@define-color on_secondary_container #d5c4a1;
+
+@define-color on_secondary_fixed #1d2021;
+
+@define-color on_secondary_fixed_variant #504945;
+
+@define-color on_surface #ebdbb2;
+
+@define-color on_surface_variant #bdae93;
+
+@define-color on_tertiary #282828;
+
+@define-color on_tertiary_container #d5c4a1;
+
+@define-color on_tertiary_fixed #1d2021;
+
+@define-color on_tertiary_fixed_variant #504945;
+
+@define-color outline #7c6f64;
+
+@define-color outline_variant #504945;
+
+/* amarelo gruvbox mais suave */
+@define-color primary #c9a86a;
+
+@define-color primary_container #504945;
+
+@define-color primary_fixed #d8b97a;
+
+@define-color primary_fixed_dim #b6925a;
+
+@define-color scrim #000000;
+
+@define-color secondary #83a598;
+
+@define-color secondary_container #504945;
+
+@define-color secondary_fixed #8ec07c;
+
+@define-color secondary_fixed_dim #689d6a;
+
+@define-color shadow #000000;
+
+@define-color source_color #c9a86a;
+
+@define-color surface #282828;
+
+@define-color surface_bright #3c3836;
+
+@define-color surface_container #32302f;
+
+@define-color surface_container_high #3c3836;
+
+@define-color surface_container_highest #504945;
+
+@define-color surface_container_low #282828;
+
+@define-color surface_container_lowest #1d2021;
+
+@define-color surface_dim #232323;
+
+@define-color surface_tint #c9a86a;
+
+@define-color surface_variant #504945;
+
+@define-color tertiary #b8bb26;
+
+@define-color tertiary_container #504945;
+
+@define-color tertiary_fixed #b8bb26;
+
+@define-color tertiary_fixed_dim #98971a;

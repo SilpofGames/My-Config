@@ -1,0 +1,14 @@
+/**
+ *
+ * Everforest Color Palette
+ *
+ **/
+
+* {
+    background:     #2D353BFF;
+    background-alt: #343F44FF;
+    foreground:     #D3C6AAFF;
+    selected:       #A7C080FF;
+    active:         #A7C080FF;
+    urgent:         #E67E80FF;
+}

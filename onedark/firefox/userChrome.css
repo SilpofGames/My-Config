@@ -1,0 +1,54 @@
+/* Better userChrome.css */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+:root {
+  --bg: #151521;
+  --fg: #e9d1c5;
+  --accent: #9e9fbb;
+  --surface: #65656c;
+}
+
+/* Hide the main navbar and show on hover */
+#nav-bar {
+  opacity: 0 !important;
+  z-index: 1 !important;
+}
+
+#navigator-toolbox:hover #nav-bar,
+#nav-bar:focus-within,
+
+/* Tabs styling */
+.tabbrowser-tab {
+  background-color: transparent !important;
+}
+
+.tab-background[selected="true"] {
+  background-color: #65656c !important;
+  background-image: none !important;
+}
+
+.tab-line[selected="true"] {
+  background-color: #9e9fbb !important;
+}
+
+/* URL bar styling */
+#urlbar-background {
+  background-color: #65656c !important;
+  border: 1px solid #9e9fbb !important;
+  border-radius: 8px !important;
+}
+
+#urlbar-input {
+  color: #e9d1c5 !important;
+}
+
+/* Sidebar and other UI elements */
+#sidebar-box {
+  --sidebar-background-color: #151521 !important;
+}
+
+/* Background of the toolbox */
+#navigator-toolbox {
+  background-color: #151521 !important;
+  border-bottom: none !important;
+}
